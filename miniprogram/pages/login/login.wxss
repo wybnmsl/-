@@ -1,0 +1,139 @@
+/* miniprogram/pages/login/login.wxss */
+page {
+  background: #f6f6f6;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.userInfo{
+  margin-top: 40rpx;
+  height: 100%;
+  width: 100%;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: none;
+  border-right: none;
+  display: flex;
+  transition: all 300ms ease;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.userinfo-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background-size: cover;
+  background-color: white;
+}
+
+.userinfo-avatar[size] {
+  width: 100rpx;
+}
+
+
+.userinfo-avatar:after {
+  border: none;
+}
+
+.image-head{
+  width: 100%;
+  height: 180rpx;
+}
+
+.nick{
+  width: 100%;
+  height: 180rpx;
+  margin-top: 20rpx;
+}
+
+.bLoc{
+  margin-top: 20rpx;
+}
+
+#login-btn{
+  position: relative;
+  top:300rpx;
+  background-color:rgb(51, 204, 170);
+  width:400rpx;
+  border-radius: 50rpx;
+}
+#login-btn text{
+  color:white;
+  font-size: 39rpx;
+}
+
+.pressbutton{
+  position: relative;
+  top:350rpx;
+  background-color:rgb(51, 204, 170);
+  width:400rpx;
+  border-radius: 50rpx;
+}
+.pressbutton text{
+  color:white;
+  font-size: 39rpx;
+}
+
+#t0{
+  width:100%;
+  height:125rpx;
+  background-color: white;
+  position: relative;
+  top:190rpx;
+}
+#t0 text{
+  position: relative;
+  left:40rpx;
+  top:40rpx;
+  color: rgb(143, 143, 143);
+  }
+  #blank{
+    width:400rpx;
+    height:80rpx;
+    margin-left: 200rpx;
+    position: relative;
+    bottom: 25rpx;
+  }
+    
+#t1{
+  width:100%;
+  height:125rpx;
+  background-color: white;
+  position: relative;
+  top:200rpx;
+}
+#t2{
+  width:100%;
+  height:125rpx;
+  background-color: white;
+  position: relative;
+  top:210rpx;
+}
+#t1 text{
+  position: relative;
+  left:40rpx;
+  top:40rpx;
+  color: rgb(143, 143, 143);
+  }
+  #username{
+    width:400rpx;
+    height:80rpx;
+    margin-left: 200rpx;
+    position: relative;
+    bottom: 25rpx;
+  }
+  #t2 text{
+  position: relative;
+  left:40rpx;
+  top:40rpx;
+  color: rgb(143, 143, 143);
+  }
+  #gender{
+    width:400rpx;
+    height:80rpx;
+    margin-left: 200rpx;
+    position: relative;
+    bottom: 25rpx;
+  }

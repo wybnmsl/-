@@ -1,0 +1,374 @@
+<html>
+    <head>
+        <meta chatset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="https://imgcache.qq.com/qcloud/tcbjs/1.9.0/tcb.js"></script>
+        <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+        </script>
+        <title>测试</title>
+        <style>
+            .container{
+                margin:auto;
+                margin-top: 40px;
+                width: 28%;
+                height: 700px;
+                overflow:auto;
+                border:2px solid black;
+                background-color: #e0e0e0;
+            }
+            div.item{
+                width: 100dnd;
+                padding: 10px;
+                overflow: hidden;
+            }
+            img{
+                width: 40px;
+                height: 40px;
+                border-radius: 20%;
+            }
+            div.dialog{
+                border-radius: 10px;
+                padding: 6px;
+                width: fit-content;
+                max-width: 350px;
+                word-break:break-all;
+            }
+            img.triangle{
+                width: 20px;
+                height: 20px;
+            }
+            img.dialog{
+                width: 300px;
+                height: 300px;
+                margin-left: 20px;
+                margin-right: 20px;
+                border-radius: 0%;
+            }
+            div.input{
+                margin:auto;
+                width: 28%;
+                border: 2px solid black;
+                background-color: #f8f8f8;
+            }
+            input{
+                height: 30px;
+                margin: 10px;
+                width: 400px;
+            }
+            button.common{
+                border-radius: 10px;
+                background-color: limegreen;
+                margin: 10px;
+                width: 50px;
+                height: 30px;
+                float: right;
+            }
+            video{
+                width: 320px;
+                height: 240px;
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+            div.login{
+                margin: auto;
+                margin-top: 40px;
+                border: 2px solid black;
+                width: 30%;
+                height: 300px;
+            }
+        </style>
+        <script>
+            function add(Derection,type,avatarUrl,nickName,content,fileID){
+                var htmls = document.getElementById("chat").innerHTML;
+                if(type == 0){
+                    htmls += addDialog(Derection,avatarUrl,nickName,content)
+                }
+                else if(type == 1){
+                    htmls+= addPic(Derection,avatarUrl,nickName,fileID);
+                }
+                else if(type == 2){
+                    htmls+= addVideo(Derection,avatarUrl,nickName,fileID);
+                }
+                else if(type == 3){
+                    htmls+= addAudio(Derection,avatarUrl,nickName,fileID);
+                }
+                document.getElementById("chat").innerHTML = htmls;
+            }
+            function addDialog(Derection,head,nickName,content){
+                let htmls = "";
+                if(Derection == "left"){
+                    htmls += ("<div class=\"item\"><img style=\"float: left;\" src=\""
+                        +head+"\"><div style=\"float: left;\"><div style=\"font-size: 10px; padding-left: 20px;padding-bottom: 2px; color: gray;\">"
+                        +nickName+"</div><div><img class=\"triangle\" style=\"float: left;\" src=\"https://6361-card-recognition-zdy-630e9-1302645979.tcb.qcloud.la/AppPic/left.jpg?sign=63913f0253791af784865167a0cd9932&t=1597244638\"><div class=\"dialog\" style=\"float: left;background-color: white;\">"
+                            +content+"</div></div></div></div>");
+                }
+                else if(Derection == "right"){
+                    htmls += ("<div class=\"item\"><img style=\"float: right;\" src=\""
+                        +head+"\"><img class=\"triangle\" style=\"float: right;\" src=\"https://6361-card-recognition-zdy-630e9-1302645979.tcb.qcloud.la/AppPic/right.jpg?sign=a127e0a5fdfa5d1087fe6af09136d16c&t=1597244767\"><div class=\"dialog\" style=\"float: right;background-color: limegreen;\">"
+                            +content+"</div></div>");
+                }
+                return htmls;
+            }
+            function addPic(Derection,head,nickName,src){
+                let htmls = "";
+                if(Derection == "left"){
+                    htmls += ("<div class=\"item\"><img style=\"float: left;\" src=\""
+                        +head+"\"><div style=\"float: left;\"><div style=\"font-size: 10px; padding-left: 20px;padding-bottom: 2px; color: gray;\">"
+                            +nickName+"</div><div><img class=\"dialog\" style=\"float: left;\" src=\""
+                                +src+"\"></div></div></div>");
+                }
+                else if(Derection == "right"){
+                    htmls += ("<div class=\"item\"><img style=\"float: right;\" src=\""
+                        +head+"\"><img class=\"dialog\" style=\"float: right;\" src=\""
+                        +src+"\"></div>");
+                }
+                return htmls;
+            }
+            function addVideo(Derection,head,nickName,src){
+                let htmls = "";
+                if(Derection == "left"){
+                    htmls += ("<div class=\"item\"><img style=\"float: left;\" src=\""
+                        +head+"\"><div style=\"float: left;\"><div style=\"font-size: 10px; padding-left: 20px;padding-bottom: 2px; color: gray;\">"
+                            +nickName+"</div><div><video style=\"float: left;\" controls><source src=\""
+                                +src+"\" type=\"video/mp4\">您的浏览器不支持 video 标签。</video></div></div></div>");
+                }
+                else if(Derection == "right"){
+                    htmls += ("<div class=\"item\"><img style=\"float: right;\" src=\""
+                        +head+"\"><video style=\"float: right;\" controls><source src=\""
+                            +src+"\" type=\"video/mp4\">您的浏览器不支持 video 标签。</video> </div>");
+                }
+                return htmls;
+            }
+            function addAudio(Derection,head,nickName,src){
+                let htmls = "";
+                if(Derection == "left"){
+                    htmls += ("<div class=\"item\"><img style=\"float: left;\" src=\""
+                        +head+"\"><div style=\"float: left;\"><div style=\"font-size: 10px; padding-left: 20px;padding-bottom: 2px; color: gray;\">"
+                            +nickName+"</div><div><audio style=\"float: left;margin-left: 10px;\" controls><source src=\""
+                                +src+"\" type=\"audio/mpeg\">您的浏览器不支持该音频格式。</audio></div></div></div>");
+                }
+                else if(Derection == "right"){
+                    htmls += ("<div class=\"item\"><img style=\"float: right;\" src=\""
+                        +head+"\"><audio style=\"float: right;margin-right: 10px;\" controls><source src=\""
+                            +src+"\" type=\"audio/mpeg\">您的浏览器不支持该音频格式。</audio> </div>");
+                }
+                return htmls;
+            }
+        </script>
+    </head>
+    <body>
+        <div class="login" id="operation">
+            <div style="overflow: auto;">
+            <button class="common" style="float: left;" onclick="logon()">注册</button>
+            <button class="common" style="float: left;" onclick="login()">登录</button>
+            </div>
+            <div id="logon" style="padding: 50px;width: 100dnd;height: 150px;">
+                    <div>
+                        <div style="float: left;margin-top: 10px;">邮箱：</div>
+                        <input type="text" id="emailOn" style="width: 200px;height: 20px;margin-left: 74px;">
+                    </div>
+                    <div>
+                        <div style="float: left;margin-top: 10px;">输入密码：</div>
+                        <input type="password" id="passwordOn" style="width: 200px;height: 20px;margin-left: 42px;">
+                    </div>
+                    <div>
+                        <div style="float: left;margin-top: 10px;">再次输入密码：</div>
+                        <input type="password" id="passwordOnAgain" style="width: 200px;height: 20px;">
+                    </div>
+                    <div style="font-size: 10px;color: brown;">密码长度不小于8位，不大于32位，需要包含数字和字母</div>
+                    <button style="margin-top: 20px;margin-left: 200px;" onclick="logonCommit()">注册</button>
+            </div>
+            <div id="login" style="padding: 50px;width: 100dnd;height: 150px;display: none;">
+                <div>
+                    <div style="float: left;margin-top: 10px;">邮箱：</div>
+                    <input type="text" id="emailIn" style="width: 200px;height: 20px;margin-left: 42px;">
+                </div>
+                <div>
+                    <div style="float: left;margin-top: 10px;">输入密码：</div>
+                    <input type="password" id="passwordIn" style="width: 200px;height: 20px;">
+                </div>
+                <button style="margin-top: 20px;margin-left: 200px;" onclick="loginCommit()">登录</button>
+            </div>
+        </div>
+        <div id="chatroom" style="display: none;">
+            <div class="container" id="chat">
+            </div>
+            <div class="input">
+                <input id="input">
+                <button class="common" onclick="commitContext()">发送</button>
+            </div>
+        </div>
+    </body>
+    <script>
+        const app = tcb.init({
+			env: 'card-recognition-zdy-630e9'
+        })
+        let info = {
+            avatarUrl:"",
+            nickName:"",
+            openID:""
+        }
+        let records = []
+
+        function logon(){
+            let domon = document.getElementById("logon")
+            let domin = document.getElementById("login")
+            domon.style.display = ""
+            domin.style.display = "none"
+        }
+        function login(){
+            let domon = document.getElementById("logon")
+            let domin = document.getElementById("login")
+            domon.style.display = "none"
+            domin.style.display = ""
+        }
+        function logonCommit(){
+            let passwordOn = document.getElementById('passwordOn').value
+            let passwordOnAgain = document.getElementById('passwordOnAgain').value
+            if(passwordOn != passwordOnAgain){
+                alert('两次密码输入不一致')
+                return
+            }
+            if(passwordOn.length <8){
+                alert('密码长度小于8位')
+                return
+            }
+            if(passwordOn.length >32){
+                alert('密码长度大于32位')
+                return
+            }
+            let email = document.getElementById("emailOn").value
+            console.log('密码：',passwordOn+" "+passwordOnAgain)
+            app
+            .auth()
+            .signUpWithEmailAndPassword(email, passwordOn)
+            .then(() => {
+                // 发送验证邮件成功
+                alert('已发送邮件！')
+            }).catch((err)=>{
+                alert('注册失败！可能原因是邮箱格式错误或者密码不符合要求')
+            });
+        }
+        function loginCommit(){
+            let email = document.getElementById("emailIn").value
+            let password = document.getElementById("passwordIn").value
+            console.log('登录：',email+" "+password)
+            app
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then((loginState) => {
+                // 登录成功
+                alert('登录成功！')
+                console.log('login:',loginState)
+                info.avatarUrl = loginState.user.avatarUrl
+                if(info.avatarUrl == ""){
+                    info.avatarUrl = "https://6361-card-recognition-zdy-630e9-1302645979.tcb.qcloud.la/AppPic/user-unlogin.png?sign=833d2f079ff0ea17a99076cbafe0d6ae&t=1597296311"
+                }
+                info.nickName = loginState.user.nickName
+                if(info.nickName == ""){
+                    info.nickName = loginState.user.email
+                }
+                console.log('info:',info)
+                info.openID = loginState.user.uid
+                downloadRecords()
+                setWatcher()
+            }).catch((err)=>{
+                alert('登录失败！可能原因是邮箱错误或者密码错误')
+            });
+        }
+        function downloadRecords(){
+            app.callFunction({
+				name:'getRecords'
+			}, async function(err, res){
+				if(err) {
+					console.error('load err:',err)
+				}else {
+                    console.log('load res:', res)
+                    let infos = res.result.data
+                    for(let i in infos){
+                        let isMine = false
+                        if(info.openID == infos[i]._openid){
+                            isMine = true
+                        }
+                        records.push({
+                            isMine:isMine,
+                            nickName:infos[i].nickName,
+                            avatarUrl:infos[i].avatarUrl,
+                            type:infos[i].type,
+                            content:infos[i].content,
+                            fileID:infos[i].fileID
+                        })
+                    }
+                    loadRecords()
+				}
+			})
+        }
+        async function loadRecords(){
+            for(let i in records){
+                let Derection = "left"
+                if(records[i].isMine){
+                    Derection = "right"
+                }
+                let cover = ""
+                if(records[i].type != 0){
+                    cover = await cloudtohttp(records[i].fileID)
+                }
+                add(Derection,records[i].type,records[i].avatarUrl,records[i].nickName,records[i].content,cover)
+            }
+            document.getElementById("operation").style.display = 'none'
+            document.getElementById("chatroom").style.display = ''
+            let chat = document.getElementById("chat")
+            chat.scrollTop = chat.scrollHeight;
+        }
+        //工具：文件cloud转url存储
+		async function cloudtohttp(src) {
+			return (await app.getTempFileURL({
+				fileList: [src]
+			})).fileList[0].tempFileURL
+        }
+        function setWatcher(){
+            const db = app.database()
+            console.log('database:',db.collection('records'))
+            const watcher = db.collection('records').watch({
+                onChange: function(snapshot) {
+                    if(snapshot.docChanges.length>0 && snapshot.docChanges[0].dataType == "add"){
+                        console.log('snapshot', snapshot.docChanges[0])
+                        let isMine = (snapshot.docChanges[0].doc._openid == info.openID)
+                        let item = {
+                            isMine:isMine,
+                            nickName:snapshot.docChanges[0].doc.nickName,
+                            avatarUrl:snapshot.docChanges[0].doc.avatarUrl,
+                            type:snapshot.docChanges[0].doc.type,
+                            content:snapshot.docChanges[0].doc.content,
+                            fileID:snapshot.docChanges[0].doc.fileID
+                        }
+                        records.push(item)
+                        let Derection = item.isMine?"right":"left"
+                        add(Derection,item.type,item.avatarUrl,item.nickName,item.content,item.fileID)
+                        let chat = document.getElementById("chat")
+                        chat.scrollTop = chat.scrollHeight;
+                    }
+                },
+                onError: function(err) {
+                    console.error('the watch closed because of error', err)
+                }
+            })   
+        }
+        function commitContext(){
+            let context = document.getElementById("input").value
+            if(context == ""){
+                return
+            }
+            console.log('context:',context)
+            const db = app.database()
+            db.collection('records').add({
+                avatarUrl:info.avatarUrl,
+                nickName:info.nickName,
+                type:0,
+                content:context,
+                fileID:''
+            })
+            $("#input").val("")
+        }
+    </script>
+</html>

@@ -1,0 +1,84 @@
+<!--miniprogram/pages/chatroom/chatroom.wxml-->
+<view class="container">
+
+	<scroll-view scroll-y="true" scroll-into-view='{{toView}}' style='height: {{scrollHeight}};'>
+		<block wx:key wx:for='{{records}}' wx:for-index="index">
+			<!-- 单个消息1 客服发出（左） -->
+			<view id='msg-{{index}}' wx:if="{{item.isMine == false}}" style='display: flex; padding: 2vw 11vw 2vw 2vw;'>
+				<view style='width: 11vw; height: 11vw;padding-top:30rpx'>
+					<image style='width: 11vw; height: 11vw; border-radius: 10rpx;' src='{{item.avatarUrl}}'></image>
+				</view>
+				<view>
+					<text style="font-size: 20rpx;padding-left:20rpx">{{item.nickName}}</text>
+					<view style="display:flex;">
+						<view wx:if="{{item.type == 0}}" style='display: flex; justify-content: flex-end; '>
+							<view style='width: 4vw; height: 11vw; margin-right: 0.5vw; display: flex; align-items: center; z-index: 9;'>
+								<image style='width: 4vw;' src='./left.png' mode='widthFix'></image>
+							</view>
+							<view class='leftMsg'>{{item.content}}</view>
+						</view>
+						<view wx:elif="{{item.type == 1}}" class="pic">
+							<image src="{{item.fileID}}" data-src="{{item.fileID}}" style="width: 450rpx; height: 400rpx;" mode="scaleToFill" bindtap="previewImage"></image>
+						</view>
+						<view wx:elif="{{item.type == 2}}" class="pic">
+							<video src="{{item.fileID}}"></video>
+						</view>
+						<view wx:elif="{{item.type == 3}}" style='display: flex; justify-content: flex-end; '>
+							<view style='width: 4vw; height: 11vw; margin-right: 0.5vw; display: flex; align-items: center; z-index: 9;'>
+								<image style='width: 4vw;' src='./left.png' mode='widthFix'></image>
+							</view>
+							<view class='leftMsg' data-src="{{item.fileID}}" bindtap="play">
+								<image src="./playLeft.png" style='width: 11vw; height: 8vw;' data-src="{{item.fileID}}" bindtap="play"></image>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+
+			<!-- 单个消息2 用户发出（右） -->
+			<view id='msg-{{index}}' wx:else style='display: flex; justify-content: flex-end; padding: 2vw 2vw 2vw 11vw;'>
+				<view wx:if="{{item.type == 0}}" style='display: flex; justify-content: flex-end; '>
+					<view class='rightMsg'>{{item.content}}</view>
+					<view style='width: 4vw; height: 11vw; margin-right: 0.5vw; display: flex; align-items: center; z-index: 9;'>
+						<image style='width: 4vw;' src='./right.png' mode='widthFix'></image>
+					</view>
+				</view>
+				<view wx:elif="{{item.type == 1}}" class="pic">
+					<image src="{{item.fileID}}" data-src="{{item.fileID}}" style="width: 450rpx; height: 400rpx;" mode="scaleToFill" bindtap="previewImage"></image>
+				</view>
+				<view wx:elif="{{item.type == 2}}" class="pic">
+					<video src="{{item.fileID}}"></video>
+				</view>
+				<view wx:elif="{{item.type == 3}}" style='display: flex; justify-content: flex-end; '>
+					<view class='rightMsg' data-src="{{item.fileID}}" bindtap="play">
+						<image src="./playRight.png" style='width: 11vw; height: 8vw;' data-src="{{item.fileID}}" bindtap="play"></image>
+					</view>
+					<view style='width: 4vw; height: 11vw; margin-right: 0.5vw; display: flex; align-items: center; z-index: 9;'>
+						<image style='width: 4vw;' src='./right.png' mode='widthFix'></image>
+					</view>
+				</view>
+				<view style='width: 11vw; height: 11vw;'>
+					<image style='width: 11vw; height: 11vw; border-radius: 10rpx;' src='{{item.avatarUrl}}'></image>
+				</view>
+			</view>
+		</block>
+		<!-- 占位 -->
+		<view style='width: 100%; height: 18vw;'></view>
+	</scroll-view>
+
+	<view class='inputRoom' style='bottom: {{inputBottom}}'>
+	  <button style='width: 10rpx; height: 10rpx; left: -30rpx' bindtouchstart="touchdown" bindtouchend="touchup">
+		<image style='width: 50rpx; height: 50rpx;' src='./audio.png' mode='widthFix'></image>
+		</button>
+		<button style='width: 10rpx; height: 10rpx; left: -50rpx' bindtap="chooseMedio">
+			<image  style='width: 50rpx; height: 50rpx;' src='./picture-filling.png' mode='widthFix' ></image>
+		</button>
+	
+		
+		<!-- <button bindtouchstart="icontest" >按住</button>
+		<input  value='{{testval}}' placeholder="请输入姓名" bindinput ='formName' bindconfirm='sendClick'></input> -->
+		<input bindconfirm='sendClick' adjust-position='{{false}}' value='{{inputVal}}' confirm-type='send' bindfocus='focus' bindblur='blur'></input>
+	</view>
+
+
+</view>

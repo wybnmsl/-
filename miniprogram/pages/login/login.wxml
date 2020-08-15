@@ -1,0 +1,43 @@
+<!--miniprogram/pages/login/login.wxml-->
+<view class="container">
+
+  <button 
+      class="userinfo-avatar"
+      style="background-image: url({{avatarUrl}})"
+      size="default"
+    ></button>
+
+  <view id="t1">
+  <text>昵称</text>
+  <input type="text" id="username" disabled="true"
+  placeholder="授权以获取昵称"  value="{{userInfo.nickName}}"></input>
+  </view>
+
+  <view id="t2">
+  <text>性别</text>
+  <input wx:if="{{userInfo.gender == 1}}" type="text" id="gender" disabled="true"
+  placeholder="授权以获得性别" value="男"></input>
+  <input wx:elif="{{userInfo.gender == 2}}" type="text" id="gender" disabled="true"
+  placeholder="授权以获得性别" value="女"></input>
+  <input wx:elif="{{userInfo.gender == 0}}" type="text" id="gender" disabled="true"
+  placeholder="授权以获得性别" value="未获得"></input>
+  <input wx:else type="text" id="gender" disabled="true"
+  placeholder="授权以获得性别" value="{{userInfo.gender}}"></input>
+  </view>
+
+  
+
+<view class="bLoc" wx:if="{{isLogin==false}}">
+<button open-type="getUserInfo" 
+bindgetuserinfo="onGetUserInfo" 
+class="pressbutton" 
+>登陆授权</button>
+</view>
+ 
+<view class="bLoc" wx:else>
+<button style="width:400rpx;" bindtap="goIntoroom" id="login-btn" ><text>登陆</text></button>
+<button style="width:400rpx;" bindtap="logout" id="logout-btn" class="pressbutton"><text>取消授权</text></button>
+
+</view>
+
+</view>
